@@ -28,6 +28,7 @@ import org.gradle.cli.ProjectPropertiesCommandLineConverter;
 import org.gradle.cli.SystemPropertiesCommandLineConverter;
 import org.gradle.concurrent.ParallelismConfiguration;
 import org.gradle.internal.logging.LoggingCommandLineConverter;
+import org.gradle.util.DeprecationLogger;
 
 import java.io.File;
 import java.util.HashMap;
@@ -49,6 +50,7 @@ public class DefaultCommandLineConverter extends AbstractCommandLineConverter<St
     private static final String REFRESH_DEPENDENCIES = "refresh-dependencies";
     private static final String PROJECT_CACHE_DIR = "project-cache-dir";
     private static final String RECOMPILE_SCRIPTS = "recompile-scripts";
+    public static final String RECOMPILE_SCRIPTS_DEPRECATION = "Support for --recompile-scripts was deprecated and is scheduled to be removed in Gradle 5.0.";
 
     private static final String CONFIGURE_ON_DEMAND = "configure-on-demand";
 
@@ -161,6 +163,7 @@ public class DefaultCommandLineConverter extends AbstractCommandLineConverter<St
         }
 
         if (options.hasOption(RECOMPILE_SCRIPTS)) {
+            DeprecationLogger.nagUserWith(RECOMPILE_SCRIPTS_DEPRECATION);
             startParameter.setRecompileScripts(true);
         }
 
