@@ -6,9 +6,12 @@ Here are the new features introduced in this Gradle release.
 IMPORTANT: if this is a patch release, ensure that a prominent link is included in the foreword to all releases of the same minor stream.
 Add-->
 
-<!--
-### Example new and noteworthy
--->
+### Improvements for plugin authors
+
+TBD: `Provider<T>` and `PropertyState<T>` can be used with `@Input` properties.
+TBD: `ListProperty<T>`
+TBD: `Provider.map()`
+TBD: `PropertyState<Directory>` and `PropertyState<RegularFile>` can be set using `File` in DSL.
 
 ## Promoted features
 
@@ -37,20 +40,21 @@ The following are the newly deprecated items in this Gradle release. If you have
 
 ## Potential breaking changes
 
-<!--
-### Example breaking change
--->
+### Changes to incubating native compile and link tasks
+
+- `AbstractNativeCompileTask.compilerArgs` changed type to `ListProperty<String>` from `List<String>`.
+- `AbstractNativeCompileTask.objectFileDir` changed type to `DirectoryVar` from `File`.
+- `AbstractLinkTask.linkerArgs` changed type to `ListProperty<String>` from `List<String>`.
 
 ## External contributions
 
 We would like to thank the following community members for making contributions to this release of Gradle.
 
-Tomas Polesovsky - Support for FindBugs JVM arguments([gradle/gradle#781](https://github.com/gradle/gradle/pull/781))
-
-Juan Martin Sotuyo Dodero - Support PMD's analysis cache([gradle/gradle#2223](https://github.com/gradle/gradle/pull/2223))
+- [Tomáš Polešovský](https://github.com/topolik) - Support for FindBugs JVM arguments (gradle/gradle#781)
+- [Juan Martín Sotuyo Dodero](https://github.com/jsotuyod) - Support PMD's analysis cache (gradle/gradle#2223)
 
 <!--
- - [Some person](https://github.com/some-person) - fixed some issue (GRADLE-1234)
+ - [Some person](https://github.com/some-person) - fixed some issue (gradle/gradle#1234)
 -->
 
 We love getting contributions from the Gradle community. For information on contributing, please see [gradle.org/contribute](https://gradle.org/contribute).

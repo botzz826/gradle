@@ -14,10 +14,20 @@
  * limitations under the License.
  */
 
-package org.gradle.internal.resource.transport.http;
+package org.gradle.api.provider;
 
-public interface HttpTimeoutSettings {
+import org.gradle.api.Incubating;
 
-    int getConnectionTimeout();
-    int getSocketTimeout();
+import java.util.List;
+
+/**
+ * Represents a property whose type is a {@link List} of elements of type {@link T}.
+ *
+ * <p><b>Note:</b> This interface is not intended for implementation by build script or plugin authors. An instance of this class can be created through the factory method {@link org.gradle.api.provider.ProviderFactory#listProperty(Class)}.
+ *
+ * @param <T> the type of elements.
+ * @since 4.3
+ */
+@Incubating
+public interface ListProperty<T> extends PropertyState<List<T>> {
 }

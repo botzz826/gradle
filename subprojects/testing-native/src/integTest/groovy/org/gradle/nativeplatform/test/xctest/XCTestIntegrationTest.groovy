@@ -22,7 +22,7 @@ import org.gradle.nativeplatform.fixtures.app.SwiftXcTestTestApp
 import org.gradle.nativeplatform.fixtures.app.TestElement
 import org.gradle.util.Requires
 import org.gradle.util.TestPrecondition
-import spock.lang.Ignore
+import spock.lang.Unroll
 
 import static org.gradle.nativeplatform.fixtures.app.SourceTestElement.newTestCase
 import static org.gradle.nativeplatform.fixtures.app.SourceTestElement.newTestSuite
@@ -82,7 +82,28 @@ apply plugin: 'xctest'
         testApp.expectedSummaryOutputPattern.matcher(output).find()
     }
 
-    @Ignore("https://github.com/gradle/gradle-native/issues/94")
+    @Unroll
+    def "#task lifecycle task runs tests"() {
+        def testApp = new SwiftXcTestTestApp([
+            newTestSuite("PassingTestSuite", [
+                newTestCase("testPass", TestElement.TestCase.Result.PASS)
+            ])
+        ])
+
+        given:
+        testApp.writeToProject(testDirectory)
+
+        when:
+        succeeds(task)
+
+        then:
+        executed(":xcTest")
+        testApp.expectedSummaryOutputPattern.matcher(output).find()
+
+        where:
+        task << ["test", "check", "build"]
+    }
+
     def "doesn't execute removed test suite and case"() {
         def oldTestApp = new SwiftXcTestTestApp([
             newTestSuite("FooTestSuite", [

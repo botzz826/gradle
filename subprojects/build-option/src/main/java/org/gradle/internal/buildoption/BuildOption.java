@@ -14,13 +14,23 @@
  * limitations under the License.
  */
 
-package org.gradle.api.internal.artifacts.ivyservice.ivyresolve;
+package org.gradle.internal.buildoption;
 
-import java.util.Set;
+import org.gradle.cli.CommandLineParser;
+import org.gradle.cli.ParsedCommandLine;
 
-public interface RepositoryBlacklister {
+import javax.annotation.Nullable;
+import java.util.Map;
 
-    boolean isBlacklisted(String repositoryId);
-    void blacklistRepository(String repositoryId, Throwable throwable);
-    Set<String> getBlacklistedRepositories();
+/**
+ * Represents a option for a build provided by the user via Gradle property and/or a command line option.
+ *
+ * @since 4.3
+ */
+public interface BuildOption<T> {
+
+    @Nullable String getGradleProperty();
+    void applyFromProperty(Map<String, String> properties, T settings);
+    void configure(CommandLineParser parser);
+    void applyFromCommandLine(ParsedCommandLine options, T settings);
 }
