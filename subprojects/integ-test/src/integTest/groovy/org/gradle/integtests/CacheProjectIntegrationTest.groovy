@@ -139,7 +139,7 @@ class CacheProjectIntegrationTest extends AbstractIntegrationTest {
 
         modifyLargeBuildScript()
         testBuild("newTask", "I am new", "--rerun-tasks")
-        assert dependenciesCache.isDirectory() && depe
+        assert dependenciesCache.isDirectory() && dependenciesCache.listFiles().length > 0
     }
 
     private TestFile findDependencyCacheDir() {
